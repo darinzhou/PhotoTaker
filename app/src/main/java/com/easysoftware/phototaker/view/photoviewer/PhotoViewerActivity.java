@@ -81,7 +81,7 @@ public class PhotoViewerActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<Photo> photos) {
                 // check photo existance
                 if (photos.isEmpty()) {
-                    Toast.makeText(PhotoViewerActivity.this, "No photo in database", Toast.LENGTH_LONG);
+                    Toast.makeText(PhotoViewerActivity.this, "No photo in database", Toast.LENGTH_LONG).show();
                     mViewPager.setVisibility(View.GONE);
                     return;
                 }
@@ -104,8 +104,8 @@ public class PhotoViewerActivity extends AppCompatActivity {
                 }
 
                 // update adapter
-                PhotoViewerAdapter adapter = new PhotoViewerAdapter(PhotoViewerActivity.this,
-                        mCompositeDisposable, mPhotoViewModel, photos);
+                PhotoViewerAdapter adapter = new PhotoViewerAdapter(
+                        PhotoViewerActivity.this, mCompositeDisposable, photos);
                 mViewPager.setAdapter(adapter);
 
                 // set current item
@@ -169,13 +169,10 @@ public class PhotoViewerActivity extends AppCompatActivity {
         private List<Photo> mPhotos;
 
         private CompositeDisposable mCompositeDisposable;
-        private PhotoViewModel mPhotoViewModel;
 
-        public PhotoViewerAdapter(Context context, CompositeDisposable compositeDisposable,
-                                  PhotoViewModel photoViewModel, List<Photo> photos) {
+        public PhotoViewerAdapter(Context context, CompositeDisposable compositeDisposable, List<Photo> photos) {
             mContext = context;
             mCompositeDisposable = compositeDisposable;
-            mPhotoViewModel = photoViewModel;
             mPhotos = photos;
 
         }
